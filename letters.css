@@ -1,0 +1,378 @@
+/* ================================
+   LETTERS/MAILBOX STYLES
+   ================================ */
+
+.letters-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.letters-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 54px;
+  border-bottom: 1px solid rgba(98, 72, 66, 0.12);
+  background: rgba(255, 249, 246, 0.5);
+}
+
+.letters-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text);
+}
+
+.back-btn {
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  text-decoration: none;
+  color: var(--rose-dark);
+}
+
+.back-btn:hover {
+  transform: scale(1.2);
+}
+
+.letters-container {
+  flex: 1;
+  padding: 40px 54px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.letters-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Letters Grid */
+.letters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* Envelope */
+.letter-envelope {
+  perspective: 1000px;
+  cursor: pointer;
+  animation: envelopeAppear 0.6s ease-out both;
+}
+
+@keyframes envelopeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotateY(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateY(0);
+  }
+}
+
+.envelope-front {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, rgba(255, 250, 247, 0.9), rgba(248, 234, 219, 0.9));
+  border: 2px solid rgba(214, 138, 138, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(116, 76, 66, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.envelope-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.letter-envelope:hover .envelope-front::before {
+  left: 100%;
+}
+
+.letter-envelope:hover .envelope-front {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(116, 76, 66, 0.15);
+  border-color: rgba(214, 138, 138, 0.5);
+}
+
+.letter-number {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.65rem;
+  color: var(--rose-dark);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.envelope-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.letter-envelope:hover .envelope-icon {
+  transform: scale(1.15);
+}
+
+.envelope-title {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Letter Modal */
+.letter-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 18, 17, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.letter-modal.open {
+  opacity: 1;
+}
+
+.letter-modal-inner {
+  position: relative;
+  width: min(800px, 90vw);
+  max-height: 85vh;
+  background: rgba(255, 249, 246, 0.98);
+  border-radius: 24px;
+  padding: 0;
+  box-shadow: 0 24px 60px rgba(69, 40, 35, 0.2);
+  overflow-y: auto;
+  animation: letterModalAppear 0.5s ease-out;
+}
+
+@keyframes letterModalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.letter-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(214, 138, 138, 0.12);
+  border-radius: 50%;
+  color: var(--rose-dark);
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.letter-modal-close:hover {
+  background: rgba(214, 138, 138, 0.22);
+  transform: scale(1.1);
+}
+
+/* Letter Paper */
+.letter-paper {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 250, 247, 1),
+    rgba(248, 234, 219, 1)
+  );
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 85vh;
+  position: relative;
+}
+
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      rgba(214, 138, 138, 0.02) 1px,
+      rgba(214, 138, 138, 0.02) 2px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1.2px,
+      rgba(214, 138, 138, 0.02) 1.2px,
+      rgba(214, 138, 138, 0.02) 2.4px
+    );
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Letter Header */
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(214, 138, 138, 0.2);
+  padding-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-header span {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.letter-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--text);
+}
+
+/* Letter Text */
+.letter-text {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-paragraph {
+  margin: 0 0 16px;
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  opacity: 0;
+  animation: paragraphAppear 0.6s ease-out forwards, revealFallback 0.01s ease 3s forwards;
+}
+
+@keyframes paragraphAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Letter Footer */
+.letter-footer {
+  text-align: right;
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(214, 138, 138, 0.1);
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .letters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .letters-container {
+    padding: 30px 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-paragraph {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .letters-header {
+    padding: 20px 16px;
+  }
+
+  .letters-container {
+    padding: 20px 16px;
+  }
+
+  .letters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .letter-paper {
+    padding: 24px 20px;
+    min-height: auto;
+  }
+
+  .letter-header {
+    gap: 12px;
+  }
+
+  .letter-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .letter-paragraph {
+    font-size: 0.95rem;
+  }
+}

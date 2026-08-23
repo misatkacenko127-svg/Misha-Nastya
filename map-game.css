@@ -1,0 +1,575 @@
+/* ================================
+   2D STORY GAME — HUD, DIALOGUE, MEMORY MODAL, MOBILE CONTROLS
+   ================================ */
+
+.game-page {
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #1b1410;
+}
+
+.game-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.game-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 22px;
+  background: rgba(20, 14, 13, 0.92);
+  color: #fffaf8;
+  z-index: 20;
+  flex-wrap: wrap;
+}
+
+.game-topbar .back-btn {
+  color: #fffaf8;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.game-title-block {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.game-title-block strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.game-title-block span {
+  font-size: 0.75rem;
+  color: rgba(255, 250, 248, 0.6);
+  letter-spacing: 0.06em;
+}
+
+.game-stats {
+  display: flex;
+  gap: 14px;
+  font-size: 0.85rem;
+}
+
+.game-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.game-menu-btn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fffaf8;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.game-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.game-stage-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#gameCanvasHost {
+  width: 100%;
+  height: 100%;
+  max-width: 1100px;
+  max-height: 720px;
+  margin: 0 auto;
+}
+
+#gameCanvasHost canvas {
+  display: block;
+}
+
+/* Quest banner */
+.game-quest-banner {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translate(-50%, -12px);
+  padding: 8px 20px;
+  background: rgba(20, 14, 13, 0.78);
+  border: 1px solid rgba(214, 138, 138, 0.4);
+  color: #fffaf8;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 24;
+  white-space: nowrap;
+}
+
+.game-quest-banner.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Dialogue box */
+.game-dialogue {
+  position: absolute;
+  left: 50%;
+  bottom: 110px;
+  transform: translate(-50%, 12px);
+  width: min(640px, 90%);
+  padding: 16px 24px;
+  background: rgba(20, 14, 13, 0.9);
+  border: 1px solid rgba(214, 138, 138, 0.35);
+  border-radius: 18px;
+  color: #fffaf8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 25;
+  cursor: pointer;
+}
+
+.game-dialogue.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: all;
+}
+
+.game-dialogue-speaker {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(214, 138, 138, 0.9);
+  min-height: 1em;
+}
+
+.game-dialogue-text {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  min-height: 1.6em;
+}
+
+.game-dialogue-hint {
+  margin: 8px 0 0;
+  text-align: right;
+  font-size: 0.7rem;
+  color: rgba(255, 250, 248, 0.55);
+}
+
+/* Choice buttons inside the dialogue box */
+.game-dialogue-choices {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.game-dialogue-choices.visible {
+  display: flex;
+}
+
+.game-choice-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(214, 138, 138, 0.45);
+  background: rgba(214, 138, 138, 0.12);
+  color: #fffaf8;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.game-choice-btn:hover {
+  background: rgba(214, 138, 138, 0.28);
+  transform: translateX(4px);
+}
+
+.game-choice-btn:active {
+  transform: translateX(2px) scale(0.99);
+}
+
+/* Interact prompt */
+.game-interact-hint {
+  position: absolute;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(214, 138, 138, 0.92);
+  color: #fffaf8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transform: translate(-50%, -140%);
+  white-space: nowrap;
+  pointer-events: all;
+  cursor: pointer;
+  animation: gameHintFloat 1.6s ease-in-out infinite;
+  z-index: 22;
+  border: none;
+}
+
+.game-interact-hint:hover {
+  background: rgba(168, 93, 91, 0.95);
+}
+
+@keyframes gameHintFloat {
+  0%, 100% { transform: translate(-50%, -140%); }
+  50% { transform: translate(-50%, -155%); }
+}
+
+/* Toast e.g. "Спогад знайдено!" */
+.game-toast {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--rose-dark, #a85d5b);
+  font-weight: 700;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 30;
+}
+
+.game-toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Memory photo modal */
+.game-memory-modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 7, 6, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  padding: 24px;
+}
+
+.game-memory-modal.open {
+  display: flex;
+}
+
+.game-memory-modal-inner {
+  max-width: 90%;
+  max-height: 88%;
+  text-align: center;
+}
+
+.game-memory-modal-inner img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.game-memory-video {
+  max-width: 100%;
+  max-height: 68vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  background: #000;
+}
+
+.game-memory-modal-inner p {
+  color: #fffaf8;
+  margin-top: 14px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+}
+
+.game-memory-close {
+  margin-top: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fffaf8;
+  padding: 8px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* World/chapter + old-map menu overlay */
+.game-world-menu {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 10, 9, 0.94);
+  display: none;
+  flex-direction: column;
+  z-index: 50;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.game-world-menu.open {
+  display: flex;
+}
+
+.game-world-menu h2 {
+  color: #fffaf8;
+  font-family: "Cormorant Garamond", serif;
+  margin: 0 0 6px;
+}
+
+.game-world-menu-close {
+  align-self: flex-end;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fffaf8;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.game-world-section {
+  margin-top: 18px;
+}
+
+.game-world-section h3 {
+  color: rgba(255, 250, 248, 0.7);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.game-world-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.game-world-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fffaf8;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.game-world-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.game-world-card.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.game-world-card.building {
+  opacity: 0.55;
+}
+
+.game-world-card strong {
+  font-size: 0.95rem;
+}
+
+.game-world-card span {
+  font-size: 0.75rem;
+  color: rgba(255, 250, 248, 0.65);
+}
+
+/* Mobile controls */
+.game-controls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+  z-index: 21;
+}
+
+.game-joystick-base {
+  position: absolute;
+  left: 26px;
+  bottom: 26px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  pointer-events: all;
+  touch-action: none;
+}
+
+.game-joystick-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border-radius: 50%;
+  background: rgba(214, 138, 138, 0.85);
+}
+
+.game-interact-btn {
+  position: absolute;
+  right: 26px;
+  bottom: 26px;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(214, 138, 138, 0.9);
+  color: #fffaf8;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  pointer-events: all;
+  touch-action: none;
+}
+
+@media (pointer: coarse), (max-width: 820px) {
+  .game-controls {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-topbar {
+    padding: 10px 14px;
+  }
+
+  .game-stats {
+    gap: 6px;
+    font-size: 0.7rem;
+  }
+
+  .game-stat {
+    padding: 4px 8px;
+  }
+
+  .game-menu-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .game-dialogue {
+    bottom: 150px;
+    padding: 12px 16px;
+    width: min(600px, 92%);
+  }
+
+  .game-dialogue-text {
+    font-size: 1rem;
+  }
+
+  .game-joystick-base {
+    width: 96px;
+    height: 96px;
+  }
+
+  .game-joystick-knob {
+    width: 42px;
+    height: 42px;
+    margin: -21px 0 0 -21px;
+  }
+
+  .game-interact-btn {
+    width: 58px;
+    height: 58px;
+    font-size: 0.95rem;
+  }
+
+  .game-stage-wrap {
+    padding-bottom: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-topbar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .game-stats {
+    gap: 4px;
+    font-size: 0.65rem;
+  }
+
+  .game-stat {
+    padding: 3px 6px;
+    gap: 2px;
+  }
+
+  .game-title-block strong {
+    font-size: 1.1rem;
+  }
+
+  .game-menu-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .game-dialogue {
+    bottom: 140px;
+    padding: 10px 14px;
+    width: 94%;
+  }
+
+  .game-dialogue-text {
+    font-size: 0.95rem;
+  }
+
+  .game-choice-btn {
+    padding: 10px 14px;
+    font-size: 1rem;
+  }
+
+  .game-joystick-base {
+    width: 88px;
+    height: 88px;
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .game-joystick-knob {
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+  }
+
+  .game-interact-btn {
+    width: 52px;
+    height: 52px;
+    right: 16px;
+    bottom: 16px;
+    font-size: 0.85rem;
+  }
+
+  .game-stage-wrap {
+    padding-bottom: 120px;
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завершення | Наша історія</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="ending.css" />
+  </head>
+  <body data-page="ending" class="story-game ending-page">
+    <div class="stars"></div>
+
+    <main class="ending-container">
+      <section class="ending-content">
+        <div class="photo-container" id="photoContainer">
+          <p>🎥</p>
+        </div>
+
+        <div class="ending-text" id="endingText">
+          <!-- Text will be revealed with delays -->
+        </div>
+
+        <div class="ending-signature">
+          <p class="signature-names" id="signatureNames"></p>
+          <p class="signature-date" id="signatureDate"></p>
+        </div>
+      </section>
+    </main>
+
+    <div class="ending-footer">
+      <button id="restartBtn" class="restart-btn">Від початку ♡</button>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+    <script src="ending.js"></script>
+  </body>
+</html>

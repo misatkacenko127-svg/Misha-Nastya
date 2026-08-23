@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Початок | Наша історія</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chapters.css" />
+  </head>
+  <body data-page="chapter-start" class="story-game">
+    <div class="page-shell chapter-page">
+      <header class="chapter-header">
+        <a href="map.html" class="back-btn">← Назад</a>
+        <h1>📖 Початок</h1>
+      </header>
+
+      <main class="chapter-container">
+        <div class="chapter-hero">
+          <h2 id="heroTitle" class="hero-title"></h2>
+          <p id="heroDate" class="hero-date"></p>
+        </div>
+
+        <article class="chapter-content">
+          <div id="heroStory" class="story-text"></div>
+        </article>
+
+        <section class="chapter-media" id="chapterMedia">
+          <!-- First month images will go here -->
+        </section>
+
+        <button id="continueBtn" class="continue-btn">Продовжити ♡</button>
+      </main>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+    <script src="chapters.js"></script>
+  </body>
+</html>

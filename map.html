@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Наша історія | Гра</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="map-game.css" />
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+  </head>
+  <body data-page="map" class="game-page">
+    <div class="game-root">
+      <header class="game-topbar">
+        <a href="index.html" class="back-btn" title="Повернутись">←</a>
+        <div class="game-title-block">
+          <strong>До нашого назавжди</strong>
+          <span id="gameChapterLabel">Наша історія тільки починається.</span>
+        </div>
+        <div class="game-stats">
+          <span class="game-stat">❤️ <span id="statLove">0</span></span>
+          <span class="game-stat">🤝 <span id="statTrust">0</span></span>
+          <span class="game-stat">💬 <span id="statUnderstanding">0</span></span>
+          <span class="game-stat">📷 <span id="memoryCount">0 / 0</span></span>
+        </div>
+        <button type="button" class="game-menu-btn" id="gameMenuBtn">☰ Наша карта</button>
+      </header>
+
+      <main class="game-stage-wrap" id="gameStageWrap">
+        <div id="gameCanvasHost"></div>
+
+        <p class="game-quest-banner" id="gameQuestBanner"></p>
+
+        <div class="game-dialogue" id="gameDialogue">
+          <p class="game-dialogue-speaker" id="gameDialogueSpeaker"></p>
+          <p class="game-dialogue-text" id="gameDialogueText"></p>
+          <div class="game-dialogue-choices" id="gameDialogueChoices"></div>
+          <p class="game-dialogue-hint">Натисни, щоб продовжити ▸</p>
+        </div>
+        <p class="game-toast" id="gameToast"></p>
+
+        <div class="game-controls">
+          <div class="game-joystick-base" id="gameJoystickBase">
+            <div class="game-joystick-knob" id="gameJoystickKnob"></div>
+          </div>
+          <button type="button" class="game-interact-btn" id="gameInteractBtn">E</button>
+        </div>
+
+        <div class="game-memory-modal" id="gameMemoryModal">
+          <div class="game-memory-modal-inner">
+            <img id="gameMemoryImg" src="" alt="Спогад" />
+            <video id="gameMemoryVideo" class="game-memory-video" controls playsinline style="display:none;"></video>
+            <p id="gameMemoryCaption"></p>
+            <button type="button" class="game-memory-close" id="gameMemoryClose">Закрити</button>
+          </div>
+        </div>
+
+        <div class="game-world-menu" id="gameWorldMenu">
+          <button type="button" class="game-world-menu-close" id="gameWorldMenuClose">×</button>
+          <h2>Наша історія</h2>
+          <p style="color: rgba(255,250,248,0.7); margin: 0;">Обери розділ гри або перейди до інших частин сайту.</p>
+
+          <div class="game-world-section">
+            <h3>Розділи гри (по місяцях)</h3>
+            <div class="game-world-grid" id="gameRoadmap"></div>
+          </div>
+
+          <div class="game-world-section">
+            <h3>Інші частини нашої історії</h3>
+            <div class="game-world-grid" id="gameOldSections"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+    <script src="map-game-data.js"></script>
+    <script src="map-game.js"></script>
+  </body>
+</html>

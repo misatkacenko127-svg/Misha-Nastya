@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Квести | Наша історія</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="quests.css" />
+  </head>
+  <body data-page="quests" class="story-game">
+    <div class="page-shell quests-page">
+      <header class="quests-header">
+        <a href="map.html" class="back-btn">← Назад</a>
+        <h1>🎮 Квести</h1>
+      </header>
+
+      <main class="quests-container">
+        <div class="progress-bar-quest">
+          <div class="progress-fill" id="questProgress"></div>
+          <span class="progress-text" id="progressText">0/5 завершено</span>
+        </div>
+
+        <div class="quest-grid" id="questGrid">
+          <!-- Quests will be generated here -->
+        </div>
+
+        <div class="quests-footer">
+          <p id="footerText">Виконай всі квести, щоб розблокувати нові розділи історії ❤️</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Quest Modal -->
+    <div class="quest-modal" id="questModal" style="display: none;">
+      <div class="quest-modal-inner">
+        <button class="quest-modal-close" type="button">×</button>
+        <div class="quest-content" id="questContent"></div>
+      </div>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+    <script src="quests.js"></script>
+  </body>
+</html>

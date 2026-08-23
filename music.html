@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Наша музика | Наша історія</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="music-room.css" />
+  </head>
+  <body data-page="music" class="story-game">
+    <div class="page-shell music-page">
+      <header class="music-header">
+        <a href="map.html" class="back-btn">← Назад</a>
+        <h1>🎵 Наша музика</h1>
+      </header>
+
+      <main class="music-container">
+        <div class="music-player-large" id="musicPlayerLarge">
+          <div class="now-playing">
+            <div class="album-art" id="albumArt"></div>
+
+            <div class="song-info">
+              <p class="current-title" id="currentTitle">Наша любов</p>
+              <p class="song-artist" id="currentArtist">Миша & Настя</p>
+              <p class="song-description" id="currentDescription"></p>
+            </div>
+          </div>
+
+          <div class="controls-section">
+            <audio id="audioPlayerMusic" preload="metadata"></audio>
+
+            <div class="progress-large">
+              <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+              </div>
+              <div class="progress-bar-large">
+                <div class="progress-fill-large" id="progressFillLarge"></div>
+                <input
+                  type="range"
+                  id="progressRangeLarge"
+                  min="0"
+                  max="100"
+                  value="0"
+                  class="progress-range"
+                />
+              </div>
+            </div>
+
+            <div class="player-buttons">
+              <button id="prevBtnMusic" class="player-btn" title="Попередня">
+                ⏮
+              </button>
+              <button id="playPauseBtnMusic" class="player-btn play-btn" title="Відтворити">
+                ▶
+              </button>
+              <button id="nextBtnMusic" class="player-btn" title="Наступна">
+                ⏭
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="playlist-section">
+          <h2>Плейлист</h2>
+          <div class="playlist" id="playlistMusic"></div>
+        </div>
+      </main>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+    <script src="music-room.js"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Наші спогади</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="memories">
+    <div class="page-shell memories-page">
+      <header class="memories-header">
+        <p class="section-kicker">Наші наймиліші моменти</p>
+        <h1>Наші наймиліші моменти 🔒</h1>
+        <div class="memory-lock" id="lockedState">
+          <p>Пройди маленький квест, щоб відкрити їх.</p>
+          <a class="primary-btn" href="game.html">Розпочати квест ♡</a>
+        </div>
+      </header>
+
+      <section class="gallery-shell hidden" id="galleryState">
+        <div class="gallery-status">Наші спогади відкриті ♡</div>
+        <div class="memories-intro">
+          <p>Кожна фотографія і кожне відео — це частинка нашого щастя. Насолоджуйся, кохана ♡</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="video-gallery" id="videoGallery">
+          <h2 class="video-gallery-title">Наші відео ♡</h2>
+          <div class="video-grid" id="videoGrid"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" type="button" aria-label="Закрити">×</button>
+        <button class="lightbox-prev" type="button" aria-label="Попереднє">‹</button>
+        <img id="lightboxImage" src="" alt="Спогад" />
+        <button class="lightbox-next" type="button" aria-label="Наступне">›</button>
+      </div>
+    </div>
+
+    <div class="video-modal" id="videoModal" aria-modal="true" role="dialog">
+      <div class="video-modal-inner">
+        <button class="video-modal-close" type="button" aria-label="Закрити">×</button>
+        <div class="video-container">
+          <video id="modalVideo" controls>
+            <source src="" type="video/mp4" />
+            Ваш браузер не підтримує відео.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

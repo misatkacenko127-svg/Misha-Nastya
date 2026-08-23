@@ -1,0 +1,293 @@
+/* ================================
+   CHAPTERS STYLES
+   ================================ */
+
+.chapter-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 54px;
+  border-bottom: 1px solid rgba(98, 72, 66, 0.12);
+  background: rgba(255, 249, 246, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.chapter-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text);
+}
+
+.back-btn {
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  text-decoration: none;
+  color: var(--rose-dark);
+}
+
+.back-btn:hover {
+  transform: scale(1.2);
+}
+
+.chapter-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 60px 54px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Hero Section */
+.chapter-hero {
+  text-align: center;
+}
+
+.hero-title {
+  margin: 0 0 12px;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.hero-date {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--rose-dark);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Story Content */
+.chapter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-paragraph {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text);
+  opacity: 0;
+  animation: storyFadeIn 0.8s ease-out forwards;
+  /* CSS-only fallback: if animations are disabled (e.g. prefers-reduced-motion)
+     or JavaScript fails, the paragraph still becomes visible. */
+  animation: storyFadeIn 0.8s ease-out forwards, revealFallback 0.01s ease 3s forwards;
+}
+
+@keyframes storyFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Section */
+.chapter-media {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background: rgba(255, 249, 246, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(98, 72, 66, 0.08);
+}
+
+.media-header {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.media-description {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Gallery */
+.chapter-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.gallery-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(116, 76, 66, 0.08);
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(116, 76, 66, 0.15);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+  animation: lightboxImageAppear 0.4s ease-out;
+}
+
+@keyframes lightboxImageAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+/* Continue Button */
+.continue-btn {
+  align-self: center;
+  margin-top: 20px;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+  color: #fffaf8;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(168, 93, 91, 0.15);
+}
+
+.continue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(168, 93, 91, 0.25);
+}
+
+@media (max-width: 980px) {
+  .chapter-container {
+    padding: 40px 30px;
+    gap: 32px;
+  }
+
+  .chapter-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-paragraph {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .chapter-header {
+    padding: 20px 16px;
+  }
+
+  .chapter-container {
+    padding: 30px 16px;
+    gap: 24px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .story-paragraph {
+    font-size: 0.95rem;
+  }
+
+  .chapter-media {
+    padding: 24px 16px;
+  }
+
+  .chapter-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .gallery-img {
+    border-radius: 8px;
+  }
+
+  .lightbox img {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .continue-btn {
+    padding: 12px 32px;
+    font-size: 0.95rem;
+  }
+}

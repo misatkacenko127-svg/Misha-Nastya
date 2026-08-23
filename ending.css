@@ -1,0 +1,266 @@
+/* ================================
+   ENDING SCREEN STYLES
+   ================================ */
+
+.ending-page {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  color: white;
+  overflow: hidden;
+}
+
+/* Starfield Background */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: starTwinkle var(--duration, 3s) ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Main Container */
+.ending-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.ending-content {
+  text-align: center;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Photo Container */
+.photo-container {
+  width: 280px;
+  height: 280px;
+  background: linear-gradient(
+    135deg,
+    rgba(214, 138, 138, 0.15),
+    rgba(168, 93, 91, 0.1)
+  );
+  border: 2px solid rgba(214, 138, 138, 0.3);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  box-shadow: 0 20px 60px rgba(214, 138, 138, 0.1);
+  animation: photoFloat 3s ease-in-out infinite;
+}
+
+@keyframes photoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Ending Text */
+.ending-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 180px;
+}
+
+.ending-text p {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  /* CSS-only fallback: if JS fails, text still becomes visible. */
+  animation: revealFallback 0.01s ease 3s forwards;
+}
+
+.ending-days {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 700;
+  color: rgba(214, 138, 138, 0.95);
+  letter-spacing: 0.1em;
+}
+
+.ending-intro {
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.ending-final {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.ending-text p.visible {
+  opacity: 1;
+  animation: textReveal 0.8s ease-out 0s forwards;
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Signature */
+.ending-signature {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.signature-names,
+.signature-date {
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.95);
+  /* CSS-only fallback: if JS fails, signature still becomes visible. */
+  animation: revealFallback 0.01s ease 3s forwards;
+}
+
+.signature-names.visible,
+.signature-date.visible {
+  opacity: 1;
+  animation: signatureAppear 0.6s ease-out forwards;
+}
+
+@keyframes signatureAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.signature-names {
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 700;
+  color: rgba(214, 138, 138, 0.9);
+  letter-spacing: 0.05em;
+}
+
+.signature-date {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Footer */
+.ending-footer {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.restart-btn {
+  padding: 14px 40px;
+  background: linear-gradient(135deg, rgba(214, 138, 138, 0.25), rgba(168, 93, 91, 0.15));
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(214, 138, 138, 0.3);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  /* CSS-only fallback: if JS fails, button still becomes visible. */
+  animation: revealFallback 0.01s ease 3s forwards;
+}
+
+.restart-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.restart-btn:hover {
+  background: linear-gradient(135deg, rgba(214, 138, 138, 0.35), rgba(168, 93, 91, 0.25));
+  border-color: rgba(214, 138, 138, 0.5);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ending-text p,
+  .signature-names,
+  .signature-date,
+  .restart-btn {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: all !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .ending-container {
+    padding: 30px 16px;
+  }
+
+  .ending-content {
+    gap: 32px;
+  }
+
+  .photo-container {
+    width: 220px;
+    height: 220px;
+    font-size: 4rem;
+  }
+
+  .ending-text {
+    gap: 16px;
+    min-height: auto;
+  }
+
+  .ending-footer {
+    bottom: 20px;
+  }
+
+  .restart-btn {
+    padding: 12px 32px;
+    font-size: 0.85rem;
+  }
+}
