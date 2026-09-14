@@ -9,8 +9,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="anniversary.css" />
   </head>
   <body data-page="home" class="story-game">
+    <div id="anniversaryOverlay" class="anniversary-overlay" style="opacity: 0; visibility: hidden;">
+      <div id="anniversaryScreen1" class="anniversary-screen anniversary-screen-1">
+        <div class="anniversary-date">14 вересня 2026</div>
+        <div class="anniversary-number">400</div>
+        <div class="anniversary-subtitle">днів</div>
+        <div class="anniversary-intro">400 днів, як я став по-справжнім щасливим.</div>
+        <button class="anniversary-continue" id="anniversaryContinue" type="button">продовжити →</button>
+      </div>
+      <div id="anniversaryScreen2" class="anniversary-screen anniversary-screen-2">
+        <div class="anniversary-frame">
+          <div class="anniversary-photo-left" id="anniversaryPhotoLeft"></div>
+          <div class="anniversary-letter">
+            <p>Кохана, дякую тобі за ці прекрасні 400 днів разом.</p>
+            <p>Я найщасливіший, бо в мене є така неймовірна кохана, така прекрасна.</p>
+            <p>Я знаю, що зараз в тебе не найкращий настрій і самопочуття, тому хочу трошечки покращити його тобі.</p>
+          </div>
+          <div class="anniversary-photo-right" id="anniversaryPhotoRight"></div>
+        </div>
+        <div class="anniversary-counter" id="anniversaryCounter"></div>
+      </div>
+      <div id="anniversaryScreen3" class="anniversary-screen anniversary-screen-3">
+        <div class="anniversary-final">
+          <div class="anniversary-final-title">Кохана...</div>
+          <div class="anniversary-final-text">вийди, будь ласочка, на 5 хвилин))</div>
+        </div>
+      </div>
+    </div>
+
     <div class="page-shell">
       <header class="topbar">
         <div class="brand">Міша <span>&</span> Настя</div>
@@ -388,5 +417,6 @@
     <script src="app.js"></script>
     <script src="script.js"></script>
     <script src="music.js"></script>
+    <script src="anniversary.js"></script>
   </body>
 </html>

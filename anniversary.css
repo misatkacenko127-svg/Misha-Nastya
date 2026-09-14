@@ -1,0 +1,343 @@
+.anniversary-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #0c0908;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  overflow: hidden;
+}
+
+.anniversary-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.anniversary-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  padding: 24px;
+  text-align: center;
+  transition: opacity 0.7s ease, visibility 0s 0.7s;
+}
+
+.anniversary-screen.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.7s ease;
+}
+
+@keyframes anniversaryBlurSharp {
+  from {
+    filter: blur(20px);
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes anniversaryFloatUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes screen2Glow {
+  from {
+    opacity: 0.6;
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.05) translate(-2%, 1%);
+  }
+}
+
+/* === SCREEN 1: 400 DAYS === */
+
+.anniversary-screen-1 {
+  background: #0c0908;
+}
+
+.anniversary-date {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 249, 246, 0.45);
+  animation: anniversaryFloatUp 1.2s ease 0.5s both;
+}
+
+.anniversary-number {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(8rem, 28vw, 22rem);
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(255, 249, 246, 0.92);
+  margin-top: 16px;
+  animation: anniversaryBlurSharp 2.2s ease 1.2s both;
+  text-shadow: 0 0 80px rgba(214, 138, 138, 0.12);
+}
+
+.anniversary-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  letter-spacing: 0.4em;
+  color: rgba(255, 249, 246, 0.35);
+  margin-top: 4px;
+  animation: anniversaryFloatUp 1s ease 2.8s both;
+}
+
+.anniversary-intro {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 300;
+  color: rgba(255, 249, 246, 0.6);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-top: 40px;
+  animation: anniversaryFloatUp 1.2s ease 3.5s both;
+}
+
+.anniversary-continue {
+  margin-top: 60px;
+  background: none;
+  border: 1px solid rgba(255, 249, 246, 0.18);
+  color: rgba(255, 249, 246, 0.55);
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  animation: anniversaryFloatUp 1s ease 4.5s both;
+}
+
+.anniversary-continue:hover {
+  background: rgba(255, 249, 246, 0.08);
+  color: rgba(255, 249, 246, 0.85);
+  border-color: rgba(255, 249, 246, 0.35);
+}
+
+/* === SCREEN 2: MEMORIES === */
+
+.anniversary-screen-2 {
+  position: relative;
+  background: radial-gradient(ellipse at center, rgba(60, 40, 20, 0.15) 0%, #0c0908 70%);
+  z-index: 1;
+}
+
+.anniversary-screen-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 40% 50%, rgba(214, 138, 138, 0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 60% 45%, rgba(180, 140, 100, 0.04) 0%, transparent 55%);
+  animation: screen2Glow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.anniversary-frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  gap: 32px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.anniversary-photo-left,
+.anniversary-photo-right {
+  flex: 0 0 32%;
+  max-width: 340px;
+  min-width: 160px;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.anniversary-photo-left img,
+.anniversary-photo-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 249, 246, 0.08);
+}
+
+.anniversary-letter {
+  flex: 0 0 36%;
+  max-width: 440px;
+  min-width: 260px;
+  text-align: center;
+  color: rgba(255, 249, 246, 0.88);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.65;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+}
+
+.anniversary-letter p {
+  margin: 0 0 1em 0;
+}
+
+.anniversary-letter p:last-child {
+  margin-bottom: 0;
+}
+
+.anniversary-counter {
+  margin-top: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: rgba(255, 249, 246, 0.25);
+}
+
+/* === SCREEN 3: FINAL === */
+
+.anniversary-screen-3 {
+  background: #0c0908;
+}
+
+.anniversary-final-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 500;
+  color: rgba(255, 249, 246, 0.8);
+  animation: anniversaryBlurSharp 1.5s ease 0.8s both;
+}
+
+.anniversary-final-text {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 2.8vw, 1.4rem);
+  font-weight: 300;
+  color: rgba(255, 249, 246, 0.5);
+  margin-top: 20px;
+  animation: anniversaryBlurSharp 1.5s ease 1.8s both;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* === GRAIN OVERLAY === */
+
+.anniversary-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 3px 3px;
+  z-index: 1;
+}
+
+/* === REDUCED MOTION === */
+
+@media (prefers-reduced-motion: reduce) {
+  .anniversary-overlay,
+  .anniversary-screen,
+  .anniversary-date,
+  .anniversary-number,
+  .anniversary-subtitle,
+  .anniversary-intro,
+  .anniversary-continue,
+  .anniversary-memories-title,
+  .anniversary-photo-frame,
+  .anniversary-photo-left,
+  .anniversary-photo-right,
+  .anniversary-letter,
+  .anniversary-counter,
+  .anniversary-final-title,
+  .anniversary-final-text,
+  .anniversary-screen-2::before {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .anniversary-screen:not(.active) {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .anniversary-screen.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* === MOBILE === */
+
+@media (max-width: 640px) {
+  .anniversary-date {
+    letter-spacing: 0.2em;
+  }
+
+  .anniversary-frame {
+    flex-direction: column;
+    gap: 20px;
+    max-width: min(420px, 90vw);
+    padding: 16px;
+  }
+
+  .anniversary-photo-left,
+  .anniversary-photo-right {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 300px;
+    min-width: unset;
+    aspect-ratio: 4 / 3;
+  }
+
+  .anniversary-letter {
+    flex: 0 0 auto;
+    max-width: 100%;
+    min-width: unset;
+    padding: 0 8px;
+  }
+
+  .anniversary-photo-frame {
+    width: min(280px, 88vw);
+  }
+
+  .anniversary-number {
+    text-shadow: 0 0 40px rgba(214, 138, 138, 0.08);
+  }
+}
